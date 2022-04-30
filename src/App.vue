@@ -1,9 +1,7 @@
-<script setup>
-import Template from './components/Template.vue';
-</script>
+<script setup></script>
 
 <template>
-	<Template msg="Karpuz" />
+	<router-view />
 </template>
 
 <style>
