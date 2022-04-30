@@ -1,19 +1,20 @@
 <script setup>
-import { ref } from 'vue';
+import { useTemplateStore } from '../stores/template';
+
+const store = useTemplateStore();
+// console.log(store);
 
 defineProps({
 	msg: String,
 });
-
-const count = ref(0);
 </script>
 
 <template>
 	<h1>{{ msg }}</h1>
+
+	<h2>Count is {{ store.count }}</h2>
+	<h2>Double count is {{ store.doubleCount }}</h2>
+	<button @click="store.increment(1)">Increment</button>
 </template>
 
-<style scoped>
-a {
-	color: #42b983;
-}
-</style>
+<style scoped></style>
