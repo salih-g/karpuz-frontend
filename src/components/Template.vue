@@ -1,18 +1,14 @@
-<template>
-
-</template>
+<template></template>
 
 <script setup>
-import { useTemplateStore } from '../stores/template';
+	import { useTemplateStore } from '../stores/template';
 
-const store = useTemplateStore();
-// console.log(store);
+	const store = useTemplateStore();
+	// console.log(store);
 
-defineProps({
-	msg: String,
-});
+	defineProps({
+		msg: String,
+	});
 </script>
 
-
-<style scoped>
-</style>
+<style scoped></style>
