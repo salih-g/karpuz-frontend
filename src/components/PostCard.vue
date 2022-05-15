@@ -13,7 +13,7 @@
 					{{ post.username }}
 				</div>
 				<small class="text-gray-400 font-thin text-xs">
-					{{ post.createdAt }} seconds ago
+					{{ timeSince(post.createdAt) }} seconds ago
 				</small>
 			</div>
 		</div>
@@ -76,6 +76,8 @@
 </template>
 
 <script setup>
+	import { timeSince } from '../utils';
+
 	defineProps({
 		post: Object,
 	});

@@ -32,7 +32,8 @@
 </template>
 
 <script setup>
-	const post = useRef('');
+	import { ref } from 'vue';
+	const post = ref('');
 </script>
 
 <style scoped></style>

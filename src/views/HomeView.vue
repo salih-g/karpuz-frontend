@@ -19,6 +19,8 @@
 	import PostCard from '../components/PostCard.vue';
 	import Template from '../components/Template.vue';
 
+	const aDay = 24 * 60 * 60 * 1000;
+
 	const posts = ref([
 		{
 			id: '1',
@@ -27,7 +29,7 @@
 				'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Incidunt, aspernatur!',
 			comments: [],
 			likes: 5,
-			createdAt: 'Sun May 15 2022 19:03:00 GMT+0300 (GMT+03:00)',
+			createdAt: new Date(Date.now() - aDay / 10),
 		},
 		{
 			id: '2',
@@ -36,7 +38,7 @@
 				'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Incidunt, aspernatur!',
 			comments: ['', '', ''],
 			likes: 5,
-			createdAt: 'Sun May 15 2022 19:03:00 GMT+0300 (GMT+03:00)',
+			createdAt: new Date(Date.now() - aDay * 2),
 		},
 		{
 			id: '3',
@@ -45,7 +47,7 @@
 				'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Incidunt, aspernatur!',
 			comments: [''],
 			likes: 20,
-			createdAt: 'Sun May 15 2022 19:03:00 GMT+0300 (GMT+03:00)',
+			createdAt: new Date(Date.now() - aDay * 10),
 		},
 	]);
 </script>
