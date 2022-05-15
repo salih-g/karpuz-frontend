@@ -4,23 +4,24 @@
 			<div class="w-auto h-auto rounded-full">
 				<img class="w-12 h-12 object-cover rounded-full shadow cursor-pointer"
 					alt="User avatar"
-					src="https://avatars.dicebear.com/api/big-smile/male/sudanmerinosu.svg?b=%23c8ccd5&r=50&scale=82">
+					:src="`https://avatars.dicebear.com/api/big-smile/${post.username}.svg?b=%23c8ccd5&r=50&scale=82`">
 			</div>
 			<div class="flex flex-col mb-2 ml-4 mt-1">
-				<div class="text-gray-600 text-sm font-semibold">Abbas</div>
+				<div class="text-gray-600 text-sm font-semibold">{{ post.username }}
+				</div>
 				<small class="text-gray-400 font-thin text-xs">
-					30 seconds ago
+					{{ post.createdAt }} seconds ago
 				</small>
 			</div>
 		</div>
-		<div class="text-gray-500 text-sm mb-2 mx-3 px-2">Lorem ipsum, dolor sit
-			amet consectetur adipisicing elit. Incidunt, aspernatur!</div>
+		<div class="text-gray-500 text-sm mb-2 mx-3 px-2">{{ post.content }} </div>
 
 		<div class="flex w-full border-t border-gray-100">
 			<div class="mt-3 mx-5 flex flex-row text-xs">
 				<div
 					class="flex text-gray-700 font-normal rounded-md mb-2 mr-4 items-center">
-					Comments:<div class="ml-1 text-gray-400 text-ms"> 30</div>
+					Comments:<div class="ml-1 text-gray-400 text-ms">
+						{{ post.comments.length }} </div>
 				</div>
 
 			</div>
@@ -36,7 +37,8 @@
 							</path>
 						</svg>
 					</span>
-					Likes: <div class="ml-1 text-gray-400  text-ms"> 10</div>
+					Likes: <div class="ml-1 text-gray-400  text-ms">{{ post.likes }}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -46,7 +48,7 @@
 			<img
 				class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer"
 				alt="User avatar"
-				src="https://avatars.dicebear.com/api/big-smile/male/sudanmerinosu.svg?b=%23c8ccd5&r=50&scale=82">
+				:src="`https://avatars.dicebear.com/api/big-smile/${post.username}.svg?b=%23c8ccd5&r=50&scale=82`">
 			<span class="absolute inset-y-0 right-0 flex items-center pr-6">
 
 			</span>
@@ -59,14 +61,12 @@
 </template>
 
 <script setup>
-import { useTemplateStore } from '../stores/template';
-
-const store = useTemplateStore();
-// console.log(store);
 
 defineProps({
-	msg: String,
+	post: Object,
 });
+
+
 </script>
 
 
