@@ -17,7 +17,6 @@
 
 	import PostInput from '../components/PostInput.vue';
 	import PostCard from '../components/PostCard.vue';
-	import Template from '../components/Template.vue';
 
 	const aDay = 24 * 60 * 60 * 1000;
 
@@ -27,7 +26,33 @@
 			username: 'abbas',
 			content:
 				'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Incidunt, aspernatur!',
-			comments: [],
+			comments: [
+				{
+					username: 'omerbaba34',
+					message: 'test comment',
+					createdAt: new Date(Date.now() - aDay / 10),
+				},
+				{
+					username: 'yagizbaba01.',
+					message: 'ceyhanprensi',
+					createdAt: new Date(Date.now() - aDay / 10),
+				},
+				{
+					username: 'dsds',
+					message: 'test comment',
+					createdAt: new Date(Date.now() - aDay / 10),
+				},
+				{
+					username: 'sgfhfhf',
+					message: 'test comment',
+					createdAt: new Date(Date.now() - aDay / 10),
+				},
+				{
+					username: 'sdsds',
+					message: 'test comment',
+					createdAt: new Date(Date.now() - aDay / 10),
+				},
+			],
 			likes: 5,
 			createdAt: new Date(Date.now() - aDay / 10),
 		},
@@ -36,7 +61,7 @@
 			username: 'sudanmerinosu',
 			content:
 				'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Incidunt, aspernatur!',
-			comments: ['', '', ''],
+			comments: [],
 			likes: 5,
 			createdAt: new Date(Date.now() - aDay * 2),
 		},
@@ -45,7 +70,7 @@
 			username: 'cabbar',
 			content:
 				'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Incidunt, aspernatur!',
-			comments: [''],
+			comments: [],
 			likes: 20,
 			createdAt: new Date(Date.now() - aDay * 10),
 		},

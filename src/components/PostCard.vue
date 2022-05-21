@@ -55,7 +55,82 @@
 			</div>
 		</div>
 
-		<div
+		<!-- Comments -->
+		<div>
+			<div
+				class="text-gray-600 p-4 flex"
+				v-if="showLess"
+				v-for="(comment, index) in post.comments.slice(0, 3)"
+				:key="index"
+			>
+				<img
+					class="rounded-full h-8 w-8 mr-2 mt-1"
+					:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
+				/>
+				<div>
+					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5">
+						<div class="font-semibold text-sm leading-relaxed">
+							{{ comment.username }}
+						</div>
+						<div class="text-xs leading-snug md:leading-normal">
+							{{ comment.message }}
+						</div>
+					</div>
+					<div class="text-xs mt-0.5 text-gray-500">
+						{{ timeSince(comment.createdAt) }} ago
+					</div>
+					<div
+						class="bg-white border border-white rounded-full float-right mr-0.5 flex shadow items-center"
+					></div>
+				</div>
+			</div>
+			<div
+				class="text-gray-600 p-4 flex"
+				v-if="!showLess"
+				v-for="(comment, index) in post.comments"
+				:key="index"
+			>
+				<img
+					class="rounded-full h-8 w-8 mr-2 mt-1"
+					:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
+				/>
+				<div>
+					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5">
+						<div class="font-semibold text-sm leading-relaxed">
+							{{ comment.username }}
+						</div>
+						<div class="text-xs leading-snug md:leading-normal">
+							{{ comment.message }}
+						</div>
+					</div>
+					<div class="text-xs mt-0.5 text-gray-500">
+						{{ timeSince(comment.createdAt) }} ago
+					</div>
+					<div
+						class="bg-white border border-white rounded-full float-right -mt-8 mr-0.5 flex shadow items-center"
+					></div>
+				</div>
+			</div>
+			<div v-if="post.comments.length" class="ml-14">
+				<button
+					v-if="showLess"
+					@click="showLess = false"
+					class="text-xs text-gray-500"
+				>
+					Show more
+				</button>
+				<button
+					v-if="!showLess"
+					@click="showLess = true"
+					class="text-xs text-gray-500"
+				>
+					Show less
+				</button>
+			</div>
+		</div>
+
+		<!-- Post a comment -->
+		<form
 			class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400"
 		>
 			<img
@@ -69,17 +144,36 @@
 				class="w-full py-2 pl-4 pr-4 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
 				style="border-radius: 25px"
 				placeholder="Post a comment..."
+				required
 				autocomplete="off"
+				maxlength="240"
+				v-model="comment"
 			/>
-		</div>
+			<progress-ring
+				:percentage="postLenght"
+				radius="10"
+				decimal-size="0"
+				int-size="0"
+				duration="0"
+				class="ml-2"
+			></progress-ring>
+		</form>
 	</div>
 </template>
 
 <script setup>
+	import { ref, computed } from 'vue';
 	import { timeSince } from '../utils';
 
 	defineProps({
 		post: Object,
+	});
+
+	const showLess = ref(true);
+	const comment = ref('');
+
+	const postLenght = computed(() => {
+		return (comment.value.length * 100) / 240;
 	});
 </script>
 
