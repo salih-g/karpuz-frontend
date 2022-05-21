@@ -1,7 +1,5 @@
 <template>
-	<div class="w-full">
-		<!-- <Template msg="Karpuz" /> -->
-	</div>
+	<div class="w-full">Login</div>
 </template>
 
 <script setup>

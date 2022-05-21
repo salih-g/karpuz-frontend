@@ -1,14 +1,23 @@
 <template>
 	<form class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10">
-		<textarea-autosize
+		<textarea
 			name="message"
 			placeholder="Type something..."
 			class="focus:outline-none w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400"
 			v-model="post"
 			maxlength="240"
-		></textarea-autosize>
+			rows="3"
+		></textarea>
 		<footer class="flex justify-between mt-2">
-			<div class="flex gap-2"></div>
+			<div class="flex gap-2 mt-1">
+				<progress-ring
+					:percentage="postLenght"
+					radius="10"
+					decimal-size="0"
+					int-size="0"
+					duration="0"
+				></progress-ring>
+			</div>
 			<button
 				class="flex items-center py-2 px-4 rounded-lg text-sm bg-red-500 text-white shadow-lg"
 			>
@@ -33,8 +42,13 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue';
+	import { ref, computed } from 'vue';
+
 	const post = ref('');
+
+	const postLenght = computed(() => {
+		return (post.value.length * 100) / 240;
+	});
 </script>
 
 <style scoped></style>
