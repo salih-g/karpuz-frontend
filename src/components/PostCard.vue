@@ -13,7 +13,7 @@
 					{{ post.username }}
 				</div>
 				<small class="text-gray-400 font-thin text-xs">
-					{{ timeSince(post.createdAt) }} seconds ago
+					{{ timeSince(post.createdAt) }} ago
 				</small>
 			</div>
 		</div>
