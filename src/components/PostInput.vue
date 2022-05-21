@@ -1,12 +1,12 @@
 <template>
 	<form class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10">
-		<textarea
+		<textarea-autosize
 			name="message"
 			placeholder="Type something..."
 			class="focus:outline-none w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400"
 			v-model="post"
 			maxlength="240"
-		></textarea>
+		></textarea-autosize>
 		<footer class="flex justify-between mt-2">
 			<div class="flex gap-2"></div>
 			<button
