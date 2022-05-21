@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full max-w-4xl items-center mx-auto">
+	<div class="w-full max-w-4xl items-center mx-auto px-6">
 		<PostInput class="centerDiv50" />
 		<PostCard
 			class="centerDiv50"
