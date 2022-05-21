@@ -1,15 +1,15 @@
 <template>
 	<Navbar />
-	<div class="container  items-center mx-auto">
+	<div class="container items-center mx-auto">
 		<router-view class="" />
 	</div>
 </template>
 
 <script setup>
-import Navbar from './components/Navbar.vue';
+	import Navbar from './components/Navbar.vue';
 </script>
 <style>
-body {
-	background-color: #202023;
-}
+	body {
+		background-color: #202023;
+	}
 </style>

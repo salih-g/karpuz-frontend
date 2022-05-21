@@ -5,6 +5,7 @@
 			placeholder="Type something..."
 			class="focus:outline-none w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400"
 			v-model="post"
+			maxlength="240"
 		></textarea>
 		<footer class="flex justify-between mt-2">
 			<div class="flex gap-2"></div>
