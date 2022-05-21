@@ -1,5 +1,8 @@
 <template>
-	<form class="h-screen overflow-hidden flex justify-center xl:mt-32 md:mt-32">
+	<form
+		class="h-screen overflow-hidden flex justify-center xl:mt-32 md:mt-32"
+		@submit.prevent="handleLogin"
+	>
 		<div class="relative py-16">
 			<div
 				class="relative container m-auto px-6 text-gray-500 md:px-12 xl:px-40"
@@ -25,6 +28,8 @@
 										class="w-full py-2 pl-4 pr-4 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-300 focus:bg-white focus:outline-none focus:border-red-400 focus:text-gray-900 focus:shadow-outline-blue"
 										style="border-radius: 25px"
 										placeholder="Username"
+										v-model="user.username"
+										required
 									/>
 								</div>
 								<div class="group h-12">
@@ -33,6 +38,8 @@
 										class="w-full py-2 px-4 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-300 focus:bg-white focus:outline-none focus:border-red-400 focus:text-gray-900 focus:shadow-outline-blue"
 										style="border-radius: 25px"
 										placeholder="Password"
+										v-model="user.password"
+										required
 									/>
 								</div>
 								<div class="group h-12">
@@ -65,7 +72,14 @@
 <script setup>
 	import { ref } from 'vue';
 
-	import Template from '../components/Template.vue';
+	const user = ref({
+		username: '',
+		password: '',
+	});
+
+	function handleLogin() {
+		console.log('Login with:', user.value.password);
+	}
 </script>
 
 <style></style>
