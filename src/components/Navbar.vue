@@ -44,7 +44,6 @@
 	// import { useTemplateStore } from '@/stores/template.store';
 
 	// const store = useTemplateStore();
-	// console.log(store);
 
 	defineProps({
 		msg: String,

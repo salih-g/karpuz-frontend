@@ -4,31 +4,34 @@ import router from '@/router';
 
 export const useAuthStore = defineStore('auth', {
 	state: () => ({
-		// initialize state from local storage to enable user to stay logged in
 		user: JSON.parse(localStorage.getItem('user')),
-		returnUrl: null,
+		error: null,
 	}),
 	actions: {
 		async login(userData) {
-			const user = await auth.login(userData);
+			try {
+				const user = await auth.login(userData);
 
-			if (user.error) {
-				return console.log(user.error);
+				this.user = user.data;
+				localStorage.setItem('user', JSON.stringify(user));
+
+				router.push('/');
+			} catch (error) {
+				this.error = error.response.data;
 			}
-			this.user = user;
-			localStorage.setItem('user', JSON.stringify(user));
-			router.push('/');
 		},
 
 		async register(userData) {
-			const user = await auth.register(userData);
+			try {
+				const user = await auth.register(userData);
 
-			if (user.error) {
-				return console.log(user.error);
+				this.user = user.data;
+				localStorage.setItem('user', JSON.stringify(user));
+
+				router.push('/');
+			} catch (error) {
+				this.error = error.response.data;
 			}
-			this.user = user;
-			localStorage.setItem('user', JSON.stringify(user));
-			router.push('/');
 		},
 	},
 });
