@@ -62,6 +62,11 @@
 									</button>
 								</div>
 							</div>
+							<div>
+								<small class="text-xs text-red-500">{{
+									authStore.error?.message
+								}}</small>
+							</div>
 							<!-- Footer -->
 							<div class="mt-5 space-y-4 text-gray-600 text-left">
 								<small class="text-xs">Already have a acount ?</small>
@@ -83,6 +88,7 @@
 	import { ref } from 'vue';
 
 	import { useAuthStore } from '@/stores/auth.store';
+	const authStore = useAuthStore();
 
 	const user = ref({
 		username: '',
@@ -90,16 +96,15 @@
 		repeatPassword: '',
 	});
 
-	function handleRegister() {
-		const authStore = useAuthStore();
-
+	async function handleRegister() {
 		if (user.value.password !== user.value.repeatPassword) {
 			user.value.password = '';
 			user.value.repeatPassword = '';
-			return console.log('Password not match');
+
+			return (authStore.error = { message: "Password doesn't match " });
 		}
 
-		return authStore.register({
+		await authStore.register({
 			username: user.value.username,
 			password: user.value.password,
 		});
