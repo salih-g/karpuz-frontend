@@ -102,7 +102,7 @@
 			user.value.password = '';
 			user.value.repeatPassword = '';
 
-			return (authStore.registerError = { message: "Password doesn't match " });
+			return (authStore.registerError = { message: "Password doesn't match" });
 		}
 
 		await authStore.register({

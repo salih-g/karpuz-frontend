@@ -30,19 +30,15 @@ describe('Register view tests', async () => {
 		expect(authStore).toBeDefined();
 	});
 
-	test('Test', () => {
-		const wrapper = mount(Register, {
-			data() {
-				return {
-					username: 'test',
-					password: 'sdsdsd',
-					repeatPassword: 'testsdsds1',
-				};
-			},
-		});
+	test('Test password match', () => {
+		const wrapper = mount(Register);
+
+		wrapper.vm.user.username = 'test';
+		wrapper.vm.user.password = 'test';
+		wrapper.vm.user.repeatPassword = 'test2';
 
 		wrapper.vm.handleRegister();
 
-		console.log(authStore.registerError);
+		expect(authStore.registerError.message).toEqual("Password doesn't match");
 	});
 });
