@@ -41,9 +41,9 @@
 </template>
 
 <script setup>
-	import { useTemplateStore } from '../stores/template';
+	// import { useTemplateStore } from '@/stores/template.store';
 
-	const store = useTemplateStore();
+	// const store = useTemplateStore();
 	// console.log(store);
 
 	defineProps({

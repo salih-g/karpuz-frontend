@@ -15,8 +15,8 @@
 <script setup>
 	import { ref } from 'vue';
 
-	import PostInput from '../components/PostInput.vue';
-	import PostCard from '../components/PostCard.vue';
+	import PostInput from '@/components/PostInput.vue';
+	import PostCard from '@/components/PostCard.vue';
 
 	const aDay = 24 * 60 * 60 * 1000;
 

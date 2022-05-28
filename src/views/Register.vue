@@ -82,6 +82,8 @@
 <script setup>
 	import { ref } from 'vue';
 
+	import { useAuthStore } from '@/stores/auth.store';
+
 	const user = ref({
 		username: '',
 		password: '',
@@ -89,7 +91,18 @@
 	});
 
 	function handleRegister() {
-		console.log('Register with:', user.value.password);
+		const authStore = useAuthStore();
+
+		if (user.value.password !== user.value.repeatPassword) {
+			user.value.password = '';
+			user.value.repeatPassword = '';
+			return console.log('Password not match');
+		}
+
+		return authStore.register({
+			username: user.value.username,
+			password: user.value.password,
+		});
 	}
 </script>
 

@@ -163,7 +163,7 @@
 
 <script setup>
 	import { ref, computed } from 'vue';
-	import { timeSince } from '../utils';
+	import { timeSince } from '@/utils';
 
 	defineProps({
 		post: Object,
