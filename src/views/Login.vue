@@ -52,6 +52,12 @@
 									</button>
 								</div>
 							</div>
+							<!-- Error -->
+							<div>
+								<small class="text-xs text-red-500">{{
+									authStore.error?.message
+								}}</small>
+							</div>
 							<!-- Footer -->
 							<div class="mt-5 space-y-4 text-gray-600 text-left">
 								<small class="text-xs">New to Karpuz ?</small>
@@ -72,13 +78,19 @@
 <script setup>
 	import { ref } from 'vue';
 
+	import { useAuthStore } from '@/stores/auth.store';
+	const authStore = useAuthStore();
+
 	const user = ref({
 		username: '',
 		password: '',
 	});
 
-	function handleLogin() {
-		console.log('Login with:', user.value.password);
+	async function handleLogin() {
+		await authStore.login({
+			username: user.value.username,
+			password: user.value.password,
+		});
 	}
 </script>
 

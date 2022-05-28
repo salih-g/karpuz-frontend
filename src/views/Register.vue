@@ -62,6 +62,7 @@
 									</button>
 								</div>
 							</div>
+							<!-- Error -->
 							<div>
 								<small class="text-xs text-red-500">{{
 									authStore.error?.message
