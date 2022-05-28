@@ -15,7 +15,7 @@
 			<div class="flex items-center md:order-2" v-if="user">
 				<img
 					class="w-8 h-8 rounded-full"
-					src="https://avatars.dicebear.com/api/big-smile/male/sudanmerinosu.svg?b=%23c8ccd5&r=50&scale=82"
+					:src="`https://avatars.dicebear.com/api/big-smile/${user.user.username}.svg?b=%23c8ccd5&r=50&scale=82`"
 					alt="user photo"
 				/>
 				<a
@@ -58,10 +58,6 @@
 	function handleLogout() {
 		return authStore.logout();
 	}
-
-	defineProps({
-		msg: String,
-	});
 </script>
 
 <style scoped></style>

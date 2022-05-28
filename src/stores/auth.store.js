@@ -5,7 +5,8 @@ import router from '@/router';
 export const useAuthStore = defineStore('auth', {
 	state: () => ({
 		user: JSON.parse(localStorage.getItem('user')),
-		error: null,
+		loginError: null,
+		registerError: null,
 	}),
 	actions: {
 		async login(userData) {
@@ -15,9 +16,9 @@ export const useAuthStore = defineStore('auth', {
 				this.user = user.data;
 				localStorage.setItem('user', JSON.stringify(user));
 
-				router.push('/');
+				router.push('/').then(() => window.location.reload());
 			} catch (error) {
-				this.error = error.response.data;
+				this.loginError = error.response.data;
 			}
 		},
 
@@ -28,9 +29,9 @@ export const useAuthStore = defineStore('auth', {
 				this.user = user.data;
 				localStorage.setItem('user', JSON.stringify(user));
 
-				router.push('/');
+				router.push('/').finally(() => window.location.reload());
 			} catch (error) {
-				this.error = error.response.data;
+				this.registerError = error.response.data;
 			}
 		},
 		logout() {

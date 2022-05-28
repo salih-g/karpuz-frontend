@@ -55,7 +55,7 @@
 							<!-- Error -->
 							<div>
 								<small class="text-xs text-red-500">{{
-									authStore.error?.message
+									authStore.loginError?.message
 								}}</small>
 							</div>
 							<!-- Footer -->

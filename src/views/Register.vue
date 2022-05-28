@@ -65,7 +65,7 @@
 							<!-- Error -->
 							<div>
 								<small class="text-xs text-red-500">{{
-									authStore.error?.message
+									authStore.registerError?.message
 								}}</small>
 							</div>
 							<!-- Footer -->
@@ -102,7 +102,7 @@
 			user.value.password = '';
 			user.value.repeatPassword = '';
 
-			return (authStore.error = { message: "Password doesn't match " });
+			return (authStore.registerError = { message: "Password doesn't match " });
 		}
 
 		await authStore.register({

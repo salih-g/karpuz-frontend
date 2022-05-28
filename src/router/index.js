@@ -1,4 +1,7 @@
+import { storeToRefs } from 'pinia';
 import { createRouter, createWebHistory } from 'vue-router';
+
+import { useAuthStore } from '@/stores/auth.store';
 
 const routes = [
 	{
@@ -21,6 +24,15 @@ const routes = [
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes,
+});
+
+router.beforeEach((to, _, next) => {
+	const authStore = useAuthStore();
+	const { user } = storeToRefs(authStore);
+
+	if ((to.name === 'login' || to.name === 'register') && user.value)
+		next({ name: 'home' });
+	else next();
 });
 
 export default router;
