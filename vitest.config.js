@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { fileURLToPath, URL } from 'url';
 import Vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
@@ -6,5 +7,10 @@ export default defineConfig({
 	test: {
 		globals: true,
 		environment: 'jsdom',
+	},
+	resolve: {
+		alias: {
+			'@': fileURLToPath(new URL('./src', import.meta.url)),
+		},
 	},
 });
