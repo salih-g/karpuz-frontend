@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .centerDiv50 {
 	margin: 50px auto;
 }
