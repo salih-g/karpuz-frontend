@@ -18,6 +18,23 @@ export default {
 		return res.data;
 	},
 
+	likeContent: async (data) => {
+		const headers = {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${data.token}`,
+		};
+		const postData = {
+			username: data.user.username,
+			contentId: data.contentId,
+		};
+
+		const res = await axios().put('/v1/content/like', postData, {
+			headers,
+		});
+
+		return res.data;
+	},
+
 	getAllContents: async () => {
 		return await axios().get('v1/content/paginated');
 	},

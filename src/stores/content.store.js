@@ -8,12 +8,22 @@ export const useContentStore = defineStore('content', {
 	actions: {
 		async createContent(data) {
 			try {
-				const response = await content.createContent(data);
-				this.feed.unshift(response);
+				await content.createContent(data);
+				await this.getAllContents();
 			} catch (error) {
 				this.contentError = error.response.data;
 			}
 		},
+
+		async likeContent(data) {
+			try {
+				await content.likeContent(data);
+				await this.getAllContents();
+			} catch (error) {
+				this.contentError = error.response.data;
+			}
+		},
+
 		async getAllContents() {
 			try {
 				const response = await content.getAllContents();

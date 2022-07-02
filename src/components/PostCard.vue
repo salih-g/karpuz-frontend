@@ -32,12 +32,17 @@
 			</div>
 			<div class="mt-3 mx-5 w-full flex justify-end text-xs">
 				<div class="flex text-gray-700 rounded-md items-center">
-					<span
+					<button
 						class="transition ease-out duration-300 hover:bg-gray-50 bg-gray-100 h-8 px-2 py-2 text-center rounded-full text-gray-100 cursor-pointer mr-2"
+						@click="handleLike(post)"
 					>
 						<svg
 							class="h-4 w-4 text-red-500"
-							fill="none"
+							:fill="
+								post.likes.includes(user.user.username)
+									? 'currentColor'
+									: 'none'
+							"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
 							stroke-width="2"
@@ -48,7 +53,7 @@
 								d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
 							></path>
 						</svg>
-					</span>
+					</button>
 					Likes:
 					<div class="ml-1 text-gray-400 text-ms">{{ post.likes.length }}</div>
 				</div>
@@ -163,7 +168,14 @@
 
 <script setup>
 	import { ref, computed } from 'vue';
+	import { storeToRefs } from 'pinia';
+	import { useAuthStore } from '@/stores/auth.store';
+	import { useContentStore } from '@/stores/content.store';
 	import { timeSince } from '@/utils';
+
+	const authStore = useAuthStore();
+	const contentStore = useContentStore();
+	const { user } = storeToRefs(authStore);
 
 	defineProps({
 		post: Object,
@@ -175,6 +187,15 @@
 	const postLenght = computed(() => {
 		return (comment.value.length * 100) / 240;
 	});
+
+	async function handleLike(post) {
+		const postData = {
+			user: user.value.user,
+			token: user.value.tokens.token,
+			contentId: post._id,
+		};
+		await contentStore.likeContent(postData);
+	}
 </script>
 
 <style scoped></style>
