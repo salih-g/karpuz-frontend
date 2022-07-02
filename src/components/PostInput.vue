@@ -1,5 +1,8 @@
 <template>
-	<form class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10">
+	<form
+		class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10 text-gray-600"
+		@submit.prevent="handleSubmit"
+	>
 		<textarea
 			name="message"
 			placeholder="Type something..."
@@ -43,12 +46,28 @@
 
 <script setup>
 	import { ref, computed } from 'vue';
+	import { storeToRefs } from 'pinia';
+	import { useAuthStore } from '@/stores/auth.store';
+	import { useContentStore } from '@/stores/content.store';
+
+	const authStore = useAuthStore();
+	const { user } = storeToRefs(authStore);
+	const contentStore = useContentStore();
 
 	const post = ref('');
-
 	const postLenght = computed(() => {
 		return (post.value.length * 100) / 240;
 	});
+
+	async function handleSubmit() {
+		const postData = {
+			user: user.value.user,
+			token: user.value.tokens.token,
+			content: post.value,
+		};
+
+		await contentStore.createContent(postData);
+	}
 </script>
 
 <style scoped></style>
