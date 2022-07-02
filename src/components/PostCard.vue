@@ -142,7 +142,7 @@
 			<img
 				class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer"
 				alt="User avatar"
-				:src="`https://avatars.dicebear.com/api/big-smile/${post.username}.svg?b=%23c8ccd5&r=50&scale=82`"
+				:src="`https://avatars.dicebear.com/api/big-smile/${user.user.username}.svg?b=%23c8ccd5&r=50&scale=82`"
 			/>
 			<span class="absolute inset-y-0 right-0 flex items-center pr-6"> </span>
 			<input
