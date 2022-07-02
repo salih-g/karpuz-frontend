@@ -78,11 +78,11 @@
 							{{ comment.username }}
 						</div>
 						<div class="text-xs leading-snug md:leading-normal">
-							{{ comment.message }}
+							{{ comment.comment }}
 						</div>
 					</div>
 					<div class="text-xs mt-0.5 text-gray-500">
-						{{ timeSince(comment.createdAt) }} ago
+						{{ timeSince(new Date(comment.createdAt)) }} ago
 					</div>
 					<div
 						class="bg-white border border-white rounded-full float-right mr-0.5 flex shadow items-center"
@@ -105,18 +105,18 @@
 							{{ comment.username }}
 						</div>
 						<div class="text-xs leading-snug md:leading-normal">
-							{{ comment.message }}
+							{{ comment.comment }}
 						</div>
 					</div>
 					<div class="text-xs mt-0.5 text-gray-500">
-						{{ timeSince(comment.createdAt) }} ago
+						{{ timeSince(new Date(comment.createdAt)) }} ago
 					</div>
 					<div
 						class="bg-white border border-white rounded-full float-right -mt-8 mr-0.5 flex shadow items-center"
 					></div>
 				</div>
 			</div>
-			<div v-if="post.comments.length" class="ml-14">
+			<div v-if="post.comments.length > 3" class="ml-14">
 				<button
 					v-if="showLess"
 					@click="showLess = false"
@@ -137,6 +137,7 @@
 		<!-- Post a comment -->
 		<form
 			class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400"
+			@submit.prevent="handleComment(post)"
 		>
 			<img
 				class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer"
@@ -195,6 +196,18 @@
 			contentId: post._id,
 		};
 		await contentStore.likeContent(postData);
+	}
+
+	async function handleComment(post) {
+		console.log(comment.value);
+		const commentData = {
+			user: user.value.user,
+			token: user.value.tokens.token,
+			contentId: post._id,
+			comment: comment.value,
+		};
+		comment.value = '';
+		await contentStore.createComment(commentData);
 	}
 </script>
 

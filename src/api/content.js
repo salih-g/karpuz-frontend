@@ -18,6 +18,24 @@ export default {
 		return res.data;
 	},
 
+	createComment: async (data) => {
+		const headers = {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${data.token}`,
+		};
+		const postData = {
+			username: data.user.username,
+			contentId: data.contentId,
+			comment: data.comment,
+		};
+
+		const res = await axios().post('/v1/content/comment/create', postData, {
+			headers,
+		});
+
+		return res.data;
+	},
+
 	likeContent: async (data) => {
 		const headers = {
 			'Content-Type': 'application/json',

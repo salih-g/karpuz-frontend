@@ -24,6 +24,15 @@ export const useContentStore = defineStore('content', {
 			}
 		},
 
+		async createComment(data) {
+			try {
+				await content.createComment(data);
+				await this.getAllContents();
+			} catch (error) {
+				this.contentError = error.response.data;
+			}
+		},
+
 		async getAllContents() {
 			try {
 				const response = await content.getAllContents();
