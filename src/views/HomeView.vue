@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full max-w-4xl items-center mx-auto px-6">
-		<PostInput class="centerDiv50" />
+		<PostInput class="centerDiv50" v-if="user" />
 		<PostCard
 			class="centerDiv50"
 			v-for="(post, key) in posts"
@@ -14,9 +14,13 @@
 
 <script setup>
 	import { ref } from 'vue';
-
+	import { storeToRefs } from 'pinia';
+	import { useAuthStore } from '@/stores/auth.store';
 	import PostInput from '@/components/PostInput.vue';
 	import PostCard from '@/components/PostCard.vue';
+
+	const authStore = useAuthStore();
+	const { user } = storeToRefs(authStore);
 
 	const aDay = 24 * 60 * 60 * 1000;
 
