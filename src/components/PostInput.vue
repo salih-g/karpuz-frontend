@@ -65,6 +65,7 @@
 			token: user.value.tokens.token,
 			content: post.value,
 		};
+		post.value = '';
 
 		await contentStore.createContent(postData);
 	}

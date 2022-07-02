@@ -2,7 +2,6 @@ import axios from './axios';
 
 export default {
 	createContent: async (data) => {
-		console.log(data.user);
 		const headers = {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${data.token}`,
@@ -17,5 +16,9 @@ export default {
 		});
 
 		return res.data;
+	},
+
+	getAllContents: async () => {
+		return await axios().get('v1/content/paginated');
 	},
 };

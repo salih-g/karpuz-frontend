@@ -13,11 +13,11 @@
 					{{ post.username }}
 				</div>
 				<small class="text-gray-400 font-thin text-xs">
-					{{ timeSince(post.createdAt) }} ago
+					{{ timeSince(new Date(post.createdAt)) }} ago
 				</small>
 			</div>
 		</div>
-		<div class="text-gray-500 text-sm mb-2 mx-3 px-2">{{ post.content }}</div>
+		<div class="text-gray-500 text-sm mb-2 mx-3 px-2">{{ post.post }}</div>
 
 		<div class="flex w-full border-t border-gray-100">
 			<div class="mt-3 mx-5 flex flex-row text-xs">
@@ -50,7 +50,7 @@
 						</svg>
 					</span>
 					Likes:
-					<div class="ml-1 text-gray-400 text-ms">{{ post.likes }}</div>
+					<div class="ml-1 text-gray-400 text-ms">{{ post.likes.length }}</div>
 				</div>
 			</div>
 		</div>
