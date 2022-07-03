@@ -17,7 +17,10 @@
 				</small>
 			</div>
 		</div>
-		<div class="text-gray-500 text-sm mb-2 mx-3 px-2">{{ post.post }}</div>
+		<div
+			class="text-gray-500 text-sm mb-2 mx-3 px-2"
+			v-html="$sanitize(urlify(post.post))"
+		></div>
 
 		<div class="flex w-full border-t border-gray-100">
 			<div class="mt-3 mx-5 flex flex-row text-xs">
@@ -78,9 +81,10 @@
 						<div class="font-semibold text-sm leading-relaxed">
 							{{ comment.username }}
 						</div>
-						<div class="text-xs leading-snug md:leading-normal">
-							{{ comment.comment }}
-						</div>
+						<div
+							class="text-xs leading-snug md:leading-normal"
+							v-html="$sanitize(urlify(comment.comment))"
+						></div>
 					</div>
 					<div class="text-xs mt-0.5 text-gray-500">
 						{{ timeSince(new Date(comment.createdAt)) }} ago
@@ -227,6 +231,15 @@
 		};
 		comment.value = '';
 		await contentStore.createComment(commentData);
+	}
+
+	function urlify(text) {
+		var urlRegex = /(https?:\/\/[^\s]+)/g;
+		return text.replace(urlRegex, function (url) {
+			return `<a target="_blank" style="text-decoration: underline;" href=" ${url} " >${new URL(url).host} </a>`;
+		});
+		// or alternatively
+		// return text.replace(urlRegex, '<a href="$1">$1</a>')
 	}
 </script>
 
