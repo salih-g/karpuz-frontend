@@ -225,7 +225,10 @@
 	}
 
 	async function handleComment(post) {
-		console.log(comment.value);
+		if (isOnlyWhiteSpace(comment.value)) {
+			comment.value = '';
+		}
+
 		const commentData = {
 			user: user.value.user,
 			token: user.value.tokens.token,
@@ -241,8 +244,9 @@
 		return text.replace(urlRegex, function (url) {
 			return `<a target="_blank" style="text-decoration: underline;" href=" ${url} " >${new URL(url).host}${new URL(url).pathname} </a>`;
 		});
-		// or alternatively
-		// return text.replace(urlRegex, '<a href="$1">$1</a>')
+	}
+	function isOnlyWhiteSpace(text) {
+		return text.trim() === '';
 	}
 </script>
 

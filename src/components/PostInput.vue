@@ -60,6 +60,9 @@
 	});
 
 	async function handleSubmit() {
+		if (isOnlyWhiteSpace(post.value)) {
+			post.value = '';
+		}
 		const postData = {
 			user: user.value.user,
 			token: user.value.tokens.token,
@@ -68,6 +71,10 @@
 		post.value = '';
 
 		await contentStore.createContent(postData);
+	}
+
+	function isOnlyWhiteSpace(text) {
+		return text.trim() === '';
 	}
 </script>
 
