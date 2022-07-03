@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full max-w-4xl items-center mx-auto px-6">
-		<PostInput class="centerDiv50" v-if="user" />
+		<PostInput class="centerDiv50" v-if="user !== null" />
 		<PostCard
 			class="centerDiv50"
 			v-for="(post, key) in feed"
