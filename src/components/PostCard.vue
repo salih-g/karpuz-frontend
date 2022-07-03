@@ -236,7 +236,7 @@
 	function urlify(text) {
 		var urlRegex = /(https?:\/\/[^\s]+)/g;
 		return text.replace(urlRegex, function (url) {
-			return `<a target="_blank" style="text-decoration: underline;" href=" ${url} " >${new URL(url).host} </a>`;
+			return `<a target="_blank" style="text-decoration: underline;" href=" ${url} " >${new URL(url).host}${new URL(url).pathname} </a>`;
 		});
 		// or alternatively
 		// return text.replace(urlRegex, '<a href="$1">$1</a>')
