@@ -35,6 +35,7 @@
 					<button
 						class="transition ease-out duration-300 hover:bg-gray-50 bg-gray-100 h-8 px-2 py-2 text-center rounded-full text-gray-100 cursor-pointer mr-2"
 						@click="handleLike(post)"
+						v-if="user !== null"
 					>
 						<svg
 							class="h-4 w-4 text-red-500"
@@ -138,6 +139,7 @@
 		<form
 			class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400"
 			@submit.prevent="handleComment(post)"
+			v-if="user !== null"
 		>
 			<img
 				class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer"
