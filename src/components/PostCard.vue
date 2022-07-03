@@ -1,5 +1,7 @@
 <template>
-	<div class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10">
+	<div
+		class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10 break-words"
+	>
 		<div class="flex flex-row px-2 py-3 mx-3">
 			<div class="w-auto h-auto rounded-full">
 				<img
@@ -77,7 +79,7 @@
 					:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
 				/>
 				<div>
-					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5">
+					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 max-w-lg">
 						<div class="font-semibold text-sm leading-relaxed">
 							{{ comment.username }}
 						</div>
@@ -105,13 +107,14 @@
 					:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
 				/>
 				<div>
-					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5">
+					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 max-w-lg">
 						<div class="font-semibold text-sm leading-relaxed">
 							{{ comment.username }}
 						</div>
-						<div class="text-xs leading-snug md:leading-normal">
-							{{ comment.comment }}
-						</div>
+						<div
+							class="text-xs leading-snug md:leading-normal"
+							v-html="$sanitize(urlify(comment.comment))"
+						></div>
 					</div>
 					<div class="text-xs mt-0.5 text-gray-500">
 						{{ timeSince(new Date(comment.createdAt)) }} ago
