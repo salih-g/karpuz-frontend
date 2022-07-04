@@ -1,7 +1,7 @@
 <template>
 	<Navbar />
 	<div class="container items-center mx-auto">
-		<router-view class="" />
+		<router-view />
 	</div>
 </template>
 

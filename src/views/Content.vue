@@ -1,7 +1,7 @@
 <template>
 	<div class="w-full max-w-4xl items-center mx-auto px-6">
 		<div
-			class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10 break-words"
+			class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10 break-words centerDiv50"
 		>
 			<div class="flex flex-row px-2 py-3 mx-3">
 				<div class="w-auto h-auto rounded-full">
