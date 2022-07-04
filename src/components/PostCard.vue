@@ -85,7 +85,7 @@
 					:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
 				/>
 				<div>
-					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 max-w-lg">
+					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 maxWidth">
 						<div class="font-semibold text-sm leading-relaxed">
 							{{ comment.username }}
 						</div>
@@ -113,7 +113,7 @@
 					:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
 				/>
 				<div>
-					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 max-w-lg">
+					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 maxWidth">
 						<div class="font-semibold text-sm leading-relaxed">
 							{{ comment.username }}
 						</div>

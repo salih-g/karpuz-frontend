@@ -5,3 +5,7 @@
 .centerDiv50 {
 	margin: 50px auto;
 }
+
+.maxWidth {
+	max-width: 250px;
+}
