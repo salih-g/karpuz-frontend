@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 
 export const useContentStore = defineStore('content', {
 	state: () => {
-		return { feed: [], contentError: '' };
+		return { feed: [], contentError: '', singlePost: {} };
 	},
 	actions: {
 		async createContent(data) {
@@ -37,6 +37,14 @@ export const useContentStore = defineStore('content', {
 			try {
 				const response = await content.getAllContents();
 				this.feed = response.data;
+			} catch (error) {
+				this.contentError = error.response.data;
+			}
+		},
+		async getContentById(contentId) {
+			try {
+				const response = await content.getContentById(contentId);
+				this.singlePost = response.data;
 			} catch (error) {
 				this.contentError = error.response.data;
 			}

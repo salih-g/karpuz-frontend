@@ -3,17 +3,23 @@
 		class="bg-white shadow rounded-lg mb-6 p-4 w-full md:w-3/4 mt-10 break-words"
 	>
 		<div class="flex flex-row px-2 py-3 mx-3">
-			<div class="w-auto h-auto rounded-full">
+			<router-link
+				class="w-auto h-auto rounded-full"
+				:to="`/content/${post._id}`"
+			>
 				<img
 					class="w-12 h-12 object-cover rounded-full shadow cursor-pointer"
 					alt="User avatar"
 					:src="`https://avatars.dicebear.com/api/big-smile/${post.username}.svg?b=%23c8ccd5&r=50&scale=82`"
 				/>
-			</div>
+			</router-link>
 			<div class="flex flex-col mb-2 ml-4 mt-1">
-				<div class="text-gray-600 text-sm font-semibold">
+				<router-link
+					class="text-gray-600 text-sm font-semibold"
+					:to="`/content/${post._id}`"
+				>
 					{{ post.username }}
-				</div>
+				</router-link>
 				<small class="text-gray-400 font-thin text-xs">
 					{{ timeSince(new Date(post.createdAt)) }} ago
 				</small>
@@ -198,7 +204,7 @@
 	import { storeToRefs } from 'pinia';
 	import { useAuthStore } from '@/stores/auth.store';
 	import { useContentStore } from '@/stores/content.store';
-	import { timeSince } from '@/utils';
+	import { timeSince, isOnlyWhiteSpace, urlify } from '@/utils';
 
 	const authStore = useAuthStore();
 	const contentStore = useContentStore();
@@ -237,16 +243,6 @@
 		};
 		comment.value = '';
 		await contentStore.createComment(commentData);
-	}
-
-	function urlify(text) {
-		var urlRegex = /(https?:\/\/[^\s]+)/g;
-		return text.replace(urlRegex, function (url) {
-			return `<a target="_blank" style="text-decoration: underline;" href=" ${url} " >${new URL(url).host}${new URL(url).pathname} </a>`;
-		});
-	}
-	function isOnlyWhiteSpace(text) {
-		return text.trim() === '';
 	}
 </script>
 

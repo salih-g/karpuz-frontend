@@ -56,4 +56,8 @@ export default {
 	getAllContents: async () => {
 		return await axios().get('v1/content/paginated');
 	},
+
+	getContentById: async (contentId) => {
+		return await axios().get(`v1/content/${contentId}`);
+	},
 };

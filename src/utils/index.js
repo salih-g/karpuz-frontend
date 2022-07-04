@@ -24,3 +24,13 @@ export function timeSince(date) {
 	}
 	return Math.floor(seconds) + ' seconds';
 }
+export function urlify(text) {
+	var urlRegex = /(https?:\/\/[^\s]+)/g;
+	return text?.replace(urlRegex, function (url) {
+		return `<a target="_blank" style="text-decoration: underline;" href=" ${url} " >${new URL(url).host}${new URL(url).pathname} </a>`;
+	});
+}
+
+export function isOnlyWhiteSpace(text) {
+	return text.trim() === '';
+}
