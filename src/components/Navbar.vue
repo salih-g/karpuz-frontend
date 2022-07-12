@@ -1,10 +1,8 @@
 <template>
-	<nav
-		class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded-b"
-		id="navbar"
-	>
-		<div class="container flex flex-wrap justify-between items-center mx-auto">
-			<a href="/" class="flex items-center">
+	<nav class="navbar bg-white" id="navbar">
+		<!-- Logo -->
+		<div class="flex-1">
+			<a href="/" class="btn btn-ghost normal-case text-xl">
 				<img
 					src="../assets/karpuz.png"
 					class="mr-3 h-6 sm:h-9"
@@ -15,40 +13,49 @@
 					>Karpuz</span
 				>
 			</a>
-			<router-link
-				class="flex items-center md:order-2"
-				v-if="user"
-				:to="`/user/${user.user.username}`"
-			>
-				<img
-					class="w-8 h-8 rounded-full"
-					:src="`https://avatars.dicebear.com/api/big-smile/${user.user.username}.svg?b=%23c8ccd5&r=50&scale=82`"
-					alt="user photo"
+		</div>
+		<div class="flex-none gap-2">
+			<!-- Search -->
+			<!-- <div class="form-control">
+				<input
+					type="text"
+					placeholder="Search"
+					class="input input-bordered bg-white text-gray-500 border-gray-200"
 				/>
-				<a
-					type="button"
-					class="text-white bg-red-500 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center ml-4"
-					@click="handleLogout"
-				>
-					Logout
-				</a>
+			</div> -->
+			<router-link
+				v-if="!user"
+				type="button"
+				class="btn btn-error text-white capitalize"
+				to="/login"
+			>
+				Login
 			</router-link>
-			<div v-if="!user">
-				<router-link
-					type="button"
-					class="text-white bg-red-500 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center"
-					to="/login"
-				>
-					Login
-				</router-link>
 
-				<router-link
-					type="button"
-					class="text-red-500 hover:text-white border border-red-400 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center ml-2"
-					to="/register"
+			<!-- Dropdown -->
+			<div class="dropdown dropdown-end" v-if="user">
+				<label tabindex="0" class="btn btn-ghost btn-circle avatar">
+					<div class="w-10 rounded-full">
+						<img
+							:src="`https://avatars.dicebear.com/api/big-smile/${user.user.username}.svg?b=%23c8ccd5&r=50&scale=82`"
+							alt="user photo"
+						/>
+					</div>
+				</label>
+				<ul
+					tabindex="0"
+					class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52 text-gray-500"
 				>
-					Register
-				</router-link>
+					<li>
+						<router-link
+							:to="`/user/${user.user.username}`"
+							class="justify-between"
+						>
+							Profile
+						</router-link>
+					</li>
+					<li><a @click="handleLogout">Logout</a></li>
+				</ul>
 			</div>
 		</div>
 	</nav>
