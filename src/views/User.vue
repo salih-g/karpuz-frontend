@@ -1,5 +1,18 @@
 <template>
-	<div class="w-full max-w-4xl items-center mx-auto px-6">
+	<div class="w-full max-w-4xl center mx-auto px-6">
+		<div
+			class="bg-white alert alert-info shadow-lg centerDiv50 text-gray-500 w-full md:w-3/4"
+		>
+			<div>
+				<img
+					class="w-12 h-12 rounded-full"
+					alt="User avatar"
+					:src="`https://avatars.dicebear.com/api/big-smile/${username}.svg?b=%23c8ccd5&r=50&scale=82`"
+				/>
+				<span class="font-bold capitalize">{{ username }}'s posts</span>
+			</div>
+		</div>
+
 		<PostCard
 			class="centerDiv50"
 			v-for="(post, key) in feed"
