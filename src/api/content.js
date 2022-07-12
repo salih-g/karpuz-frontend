@@ -60,4 +60,8 @@ export default {
 	getContentById: async (contentId) => {
 		return await axios().get(`v1/content/${contentId}`);
 	},
+
+	getContentByUsername: async (username) => {
+		return await axios().get(`v1/content/user/${username}`);
+	},
 };
