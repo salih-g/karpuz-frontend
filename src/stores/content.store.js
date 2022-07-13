@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 
 export const useContentStore = defineStore('content', {
 	state: () => {
-		return { feed: [], contentError: '', singlePost: {} };
+		return { feed: [], contentError: '', singlePost: {}, searchParam: '' };
 	},
 	actions: {
 		async createContent(data) {

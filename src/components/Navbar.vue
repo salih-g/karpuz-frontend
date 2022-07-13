@@ -16,13 +16,14 @@
 		</div>
 		<div class="flex-none gap-2">
 			<!-- Search -->
-			<!-- <div class="form-control">
+			<div class="form-control" v-if="router.currentRoute.value.path === '/'">
 				<input
 					type="text"
 					placeholder="Search"
 					class="input input-bordered bg-white text-gray-500 border-gray-200"
+					v-model="searchParam"
 				/>
-			</div> -->
+			</div>
 			<router-link
 				v-if="!user"
 				type="button"
@@ -62,11 +63,16 @@
 </template>
 
 <script setup>
+	import { useRouter } from 'vue-router';
 	import { storeToRefs } from 'pinia';
 	import { useAuthStore } from '@/stores/auth.store';
+	import { useContentStore } from '@/stores/content.store';
 
+	const router = useRouter();
 	const authStore = useAuthStore();
+	const contentStore = useContentStore();
 	const { user } = storeToRefs(authStore);
+	const { searchParam } = storeToRefs(contentStore);
 
 	function handleLogout() {
 		return authStore.logout();
