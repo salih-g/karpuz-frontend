@@ -24,9 +24,9 @@
 				/>
 			</div>
 			<router-link
-				v-if="!user"
+				v-if="user"
 				type="button"
-				class="btn btn-error text-white capitalize"
+				class="btn btn-primary capitalize"
 				to="/login"
 			>
 				Login
