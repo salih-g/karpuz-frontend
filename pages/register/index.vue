@@ -55,7 +55,7 @@
 					</div>
 					<!-- Footer -->
 					<div class="text-gray-600 text-left">
-						<small class="text-xs">Already have a acount ?</small>
+						<small class="text-xs">Already have an account ?</small>
 						<router-link to="/login" class="text-xs font-bold ml-1 text-primary"
 							>Login.</router-link
 						>
