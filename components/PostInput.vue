@@ -15,15 +15,15 @@
 				<!-- process bar -->
 				<div
 					class="radial-progress text-error"
-					style="--value: 10; --size: 2rem; --thickness: 6px"
+					style="--value: 50; --size: 2rem; --thickness: 6px"
 				></div>
 			</div>
 			<button
-				class="flex items-center py-2 px-4 rounded-lg text-sm bg-red-500 text-white shadow-lg"
+				class="btn btn-primary mt-2 flex items-center rounded-lg text-sm bg-red-500 shadow-lg"
 			>
 				Send
 				<svg
-					class="ml-1"
+					class="ml-0.5"
 					viewBox="0 0 24 24"
 					width="16"
 					height="16"
