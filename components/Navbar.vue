@@ -2,7 +2,7 @@
 	<nav class="navbar bg-white" id="navbar">
 		<!-- Logo -->
 		<div class="flex-1">
-			<a href="/" class="btn btn-ghost normal-case text-xl">
+			<router-link to="/" class="btn btn-ghost normal-case text-xl">
 				<img
 					src="../assets/karpuz.png"
 					class="mr-3 h-6 sm:h-9"
@@ -12,7 +12,7 @@
 					class="self-center text-xl font-semibold whitespace-nowrap text-gray-600"
 					>Karpuz</span
 				>
-			</a>
+			</router-link>
 		</div>
 		<div class="flex-none gap-2">
 			<!-- Search -->

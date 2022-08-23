@@ -12,10 +12,11 @@
 		<!-- footer -->
 		<div class="flex justify-between mt-2">
 			<div class="flex gap-2 mt-1">
-				<processbar
+				<!-- process bar -->
+				<div
 					class="radial-progress text-error"
 					style="--value: 10; --size: 2rem; --thickness: 6px"
-				></processbar>
+				></div>
 			</div>
 			<button
 				class="flex items-center py-2 px-4 rounded-lg text-sm bg-red-500 text-white shadow-lg"
