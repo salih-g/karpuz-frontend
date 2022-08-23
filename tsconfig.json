@@ -1,7 +1,3 @@
 {
   "extends": "./.nuxt/tsconfig.json",
-  "vueCompilerOptions": {
-    "experimentalDisableTemplateSupport":true,
-
-  }
 }
