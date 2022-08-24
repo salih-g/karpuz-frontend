@@ -2,7 +2,7 @@
 	<nav class="navbar bg-white" id="navbar">
 		<!-- Logo -->
 		<div class="flex-1">
-			<router-link to="/" class="btn btn-ghost normal-case text-xl">
+			<NuxtLink to="/" append class="btn btn-ghost normal-case text-xl">
 				<img
 					src="../assets/karpuz.png"
 					class="mr-3 h-6 sm:h-9"
@@ -12,7 +12,7 @@
 					class="self-center text-xl font-semibold whitespace-nowrap text-gray-600"
 					>Karpuz</span
 				>
-			</router-link>
+			</NuxtLink>
 		</div>
 		<div class="flex-none gap-2">
 			<!-- Search -->
@@ -23,14 +23,15 @@
 					class="input input-bordered bg-white text-gray-500 border-gray-200 w-40"
 				/>
 			</div>
-			<router-link
+			<NuxtLink
 				v-if="user"
+				append
 				type="button"
 				class="btn btn-primary capitalize"
 				to="/login"
 			>
 				Login
-			</router-link>
+			</NuxtLink>
 
 			<!-- Dropdown -->
 			<div class="dropdown dropdown-end" v-if="user">
@@ -47,9 +48,9 @@
 					class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52 text-gray-500"
 				>
 					<li>
-						<!-- <router-link :to="`/user/${user.username}`" class="justify-between">
+						<!-- <NuxtLink append :to="`/user/${user.username}`" class="justify-between">
 							Profile
-						</router-link> -->
+						</NuxtLink> -->
 					</li>
 					<li><a @click="handleLogout">Logout</a></li>
 				</ul>
