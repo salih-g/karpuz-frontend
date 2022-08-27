@@ -9,4 +9,9 @@ export default defineNuxtConfig({
 		},
 	},
 	modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
+	runtimeConfig: {
+		public: {
+			baseUrl: process.env.BACKEND_URL,
+		},
+	},
 });
