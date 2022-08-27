@@ -13,7 +13,10 @@
 					</p>
 				</div>
 				<!-- card -->
-				<div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-white">
+				<form
+					class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-white"
+					@submit.prevent="handleRegister"
+				>
 					<div class="card-body">
 						<!-- email -->
 						<div class="form-control">
@@ -23,7 +26,9 @@
 							<input
 								type="email"
 								placeholder="me@karpuz.com"
+								v-model="user.email"
 								class="input input-bordered bg-gray-100 placeholder-gray-300 focus:bg-white focus:outline-none focus:border-red-400 focus:text-gray-900 font-bold"
+								required
 							/>
 						</div>
 						<!-- username -->
@@ -35,7 +40,9 @@
 							<input
 								type="text"
 								placeholder="karpuz"
+								v-model="user.username"
 								class="input input-bordered bg-gray-100 placeholder-gray-300 focus:bg-white focus:outline-none focus:border-red-400 focus:text-gray-900 font-bold"
+								required
 							/>
 						</div>
 						<!-- password -->
@@ -46,7 +53,9 @@
 							<input
 								type="password"
 								placeholder="Password"
+								v-model="user.password"
 								class="input input-bordered bg-gray-100 placeholder-gray-300 focus:bg-white focus:outline-none focus:border-red-400 focus:text-gray-900 font-bold"
+								required
 							/>
 						</div>
 						<!-- repeat password -->
@@ -54,17 +63,20 @@
 							<input
 								type="password"
 								placeholder="Repeat Password"
+								v-model="user.repeatpassword"
 								class="input input-bordered bg-gray-100 placeholder-gray-300 focus:bg-white focus:outline-none focus:border-red-400 focus:text-gray-900 font-bold"
+								required
 							/>
 						</div>
+						<!-- submit button -->
 						<div class="form-control mt-6">
 							<button type="submit" class="btn btn-primary">Register</button>
 						</div>
 						<!-- Error -->
 						<div>
-							<!-- <small class="text-xs text-red-500">{{
-						authStore.loginError?.message
-					}}</small> -->
+							<small class="text-xs text-red-500">{{
+								authStore.registerError?.message
+							}}</small>
 						</div>
 						<!-- Footer -->
 						<div class="text-gray-600 text-left">
@@ -77,8 +89,41 @@
 							>
 						</div>
 					</div>
-				</div>
+					<pre>{{ authStore.user }} </pre>
+				</form>
 			</div>
 		</div>
 	</div>
 </template>
+
+<script setup>
+	import { useAuthStore } from '@/stores/auth.store';
+	const authStore = useAuthStore();
+
+	const user = reactive({
+		email: '',
+		username: '',
+		password: '',
+		repeatpassword: '',
+	});
+
+	async function handleRegister() {
+		if (user.password !== user.repeatpassword) {
+			user.password = '';
+			user.repeatpassword = '';
+
+			authStore.registerError = { message: "Password doesn't match" };
+			return setTimeout(() => {
+				authStore.registerError = null;
+			}, 2000);
+		}
+
+		await authStore.register({
+			email: user.email,
+			username: user.username,
+			password: user.password,
+		});
+
+		authStore.registerError = null;
+	}
+</script>

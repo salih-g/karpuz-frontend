@@ -15,14 +15,15 @@
 			</NuxtLink>
 		</div>
 		<div class="flex-none gap-2">
-			<!-- Search -->
-			<div class="form-control" v-if="true">
+			<!-- Search  belli bi boyuttan büyükse true yap-->
+			<div class="form-control" v-if="false">
 				<input
 					type="text"
 					placeholder="Search"
 					class="input input-bordered bg-white text-gray-500 border-gray-200 w-40"
 				/>
 			</div>
+			<!-- login -->
 			<NuxtLink
 				v-if="user"
 				append
@@ -32,9 +33,21 @@
 			>
 				Login
 			</NuxtLink>
+			|
+			<!-- register -->
+
+			<NuxtLink
+				v-if="user"
+				append
+				type="button"
+				class="btn btn-primary btn-outline capitalize"
+				to="/register"
+			>
+				Register
+			</NuxtLink>
 
 			<!-- Dropdown -->
-			<div class="dropdown dropdown-end" v-if="user">
+			<div class="dropdown dropdown-end" v-if="false">
 				<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 					<div class="w-10 rounded-full">
 						<img
@@ -48,9 +61,13 @@
 					class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52 text-gray-500"
 				>
 					<li>
-						<!-- <NuxtLink append :to="`/user/${user.username}`" class="justify-between">
+						<NuxtLink
+							append
+							:to="`/user/${user.username}`"
+							class="justify-between"
+						>
 							Profile
-						</NuxtLink> -->
+						</NuxtLink>
 					</li>
 					<li><a @click="handleLogout">Logout</a></li>
 				</ul>
