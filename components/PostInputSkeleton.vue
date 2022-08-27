@@ -14,9 +14,9 @@
 					style="--value: 50; --size: 2rem; --thickness: 6px"
 				></div>
 			</div>
-			<button
-				class="btn border-none mt-2 flex items-center rounded-lg text-sm bg-gray-300 shadow-lg w-24"
-			></button>
+			<div
+				class="border-none h-10 mt-2 flex items-center rounded-lg text-sm bg-gray-300 shadow-lg w-24"
+			></div>
 		</div>
 	</div>
 </template>
