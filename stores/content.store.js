@@ -6,6 +6,7 @@ export const useContentStore = defineStore('content', {
 	state: () => ({
 		feed: [],
 		fetchError: null,
+		loading: false,
 	}),
 	actions: {
 		async initFetchPosts() {
@@ -16,9 +17,16 @@ export const useContentStore = defineStore('content', {
 				this.fetchError = error.response.data;
 			}
 		},
-		async createPost(postData, user) {
+		async initCreatePost(postBody, user) {
+			this.loading = true;
 			try {
-				await this.initFetchPosts();
+				await content.createPost(
+					{ userId: user.id, body: postBody },
+					user.token,
+				);
+				await this.initFetchPosts().then(() => {
+					this.loading = false;
+				});
 			} catch (error) {
 				this.fetchError = error.response.data;
 			}
