@@ -79,8 +79,8 @@
 <script setup>
 	import { storeToRefs } from 'pinia';
 	import { useAuthStore } from '@/stores/auth.store';
-	const authStore = useAuthStore();
 
+	const authStore = useAuthStore();
 	const { user } = storeToRefs(authStore);
 
 	async function handleLogout() {
