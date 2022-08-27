@@ -89,7 +89,6 @@
 							>
 						</div>
 					</div>
-					<pre>{{ authStore.user }} </pre>
 				</form>
 			</div>
 		</div>
@@ -124,6 +123,10 @@
 			password: user.password,
 		});
 
-		authStore.registerError = null;
+		if (authStore.registerError !== null) {
+			setTimeout(() => {
+				authStore.registerError = null;
+			}, 2000);
+		}
 	}
 </script>

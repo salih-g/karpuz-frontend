@@ -31,6 +31,7 @@ export const useAuthStore = defineStore('auth', {
 				this.user = user;
 				!process.server &&
 					window.localStorage.setItem('user', JSON.stringify(user));
+				useRouter().push('/');
 			} catch (error) {
 				this.registerError = error.response.data;
 			}
