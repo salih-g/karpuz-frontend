@@ -1,3 +1,3 @@
 export default {
-	BACKEND_URL: import.meta.env.BACKEND_URL || 'http://localhost:8081',
+	BACKEND_URL: process.env.BACKEND_URL || 'http://localhost:8081',
 };
