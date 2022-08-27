@@ -2,7 +2,7 @@
 	<div>
 		<div v-if="feed.length === 0">
 			<main class="w-full max-w-4xl items-center mx-auto px-6">
-				<PostInputSkeleton class="centerDiv50" />
+				<PostInput class="centerDiv50" v-if="user" />
 				<PostCardSkeleton class="centerDiv50" />
 				<PostCardSkeleton class="centerDiv50" />
 				<PostCardSkeleton class="centerDiv50" />
