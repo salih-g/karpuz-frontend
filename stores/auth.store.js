@@ -11,14 +11,12 @@ export const useAuthStore = defineStore('auth', {
 	actions: {
 		async login(userData) {
 			try {
-				const user = await auth.login(userData);
+				const { user } = await auth.login(userData);
 
-				this.user = user.data;
-				setCookie('user', user);
-
-				useRouter()
-					.push('/')
-					.then(() => window.location.reload());
+				this.user = user;
+				!process.server &&
+					window.localStorage.setItem('user', JSON.stringify(user));
+				useRouter().push('/');
 			} catch (error) {
 				this.loginError = error.response.data;
 			}
@@ -27,7 +25,7 @@ export const useAuthStore = defineStore('auth', {
 		async register(userData) {
 			try {
 				const { user } = await auth.register(userData);
-				console.log(user);
+
 				this.user = user;
 				!process.server &&
 					window.localStorage.setItem('user', JSON.stringify(user));
@@ -38,7 +36,7 @@ export const useAuthStore = defineStore('auth', {
 		},
 		logout() {
 			this.user = null;
-			// localStorage.clear('user');
+			!process.server && window.localStorage.clear('user');
 		},
 	},
 });

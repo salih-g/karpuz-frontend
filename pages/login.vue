@@ -13,8 +13,12 @@
 					</p>
 				</div>
 				<!-- card -->
-				<div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-white">
+				<form
+					class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-white"
+					@submit.prevent="handleLogin"
+				>
 					<div class="card-body">
+						<!-- username -->
 						<div class="form-control">
 							<label class="label">
 								<span class="label-text text-gray-500 font-bold">Username</span>
@@ -23,16 +27,21 @@
 								type="text"
 								placeholder="karpuz"
 								class="input input-bordered bg-gray-100 placeholder-gray-300 focus:bg-white focus:outline-none focus:border-red-400 focus:text-gray-900 font-bold"
+								required
+								v-model="user.username"
 							/>
 						</div>
+						<!-- password -->
 						<div class="form-control">
 							<label class="label">
 								<span class="label-text text-gray-500 font-bold">Password</span>
 							</label>
 							<input
+								v-model="user.password"
 								type="password"
 								placeholder="Password"
 								class="input input-bordered bg-gray-100 placeholder-gray-300 focus:bg-white focus:outline-none focus:border-red-400 focus:text-gray-900 font-bold"
+								required
 							/>
 						</div>
 						<div class="form-control mt-6">
@@ -40,9 +49,9 @@
 						</div>
 						<!-- Error -->
 						<div>
-							<!-- <small class="text-xs text-red-500">{{
-						authStore.loginError?.message
-					}}</small> -->
+							<small class="text-xs text-red-500">{{
+								authStore.loginError?.message
+							}}</small>
 						</div>
 						<!-- Footer -->
 						<div class="text-gray-600 text-left">
@@ -55,8 +64,31 @@
 							>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </template>
+
+<script setup>
+	import { useAuthStore } from '@/stores/auth.store';
+	const authStore = useAuthStore();
+
+	const user = reactive({
+		username: '',
+		password: '',
+	});
+
+	async function handleLogin() {
+		await authStore.login({
+			username: user.username,
+			password: user.password,
+		});
+
+		if (authStore.loginError !== null) {
+			setTimeout(() => {
+				authStore.loginError = null;
+			}, 2000);
+		}
+	}
+</script>

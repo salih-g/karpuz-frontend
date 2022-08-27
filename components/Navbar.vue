@@ -24,30 +24,30 @@
 				/>
 			</div>
 			<!-- login -->
-			<NuxtLink
-				v-if="user"
-				append
-				type="button"
-				class="btn btn-primary capitalize"
-				to="/login"
-			>
-				Login
-			</NuxtLink>
-			|
-			<!-- register -->
+			<div v-if="!user">
+				<NuxtLink
+					append
+					type="button"
+					class="btn btn-primary capitalize"
+					to="/login"
+				>
+					Login
+				</NuxtLink>
+				|
+				<!-- register -->
 
-			<NuxtLink
-				v-if="user"
-				append
-				type="button"
-				class="btn btn-primary btn-outline capitalize"
-				to="/register"
-			>
-				Register
-			</NuxtLink>
+				<NuxtLink
+					append
+					type="button"
+					class="btn btn-primary btn-outline capitalize"
+					to="/register"
+				>
+					Register
+				</NuxtLink>
+			</div>
 
 			<!-- Dropdown -->
-			<div class="dropdown dropdown-end" v-if="false">
+			<div class="dropdown dropdown-end" v-if="user">
 				<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 					<div class="w-10 rounded-full">
 						<img
@@ -77,7 +77,15 @@
 </template>
 
 <script setup>
-	const user = ref({ username: 'sudanmerinosu' });
+	import { storeToRefs } from 'pinia';
+	import { useAuthStore } from '@/stores/auth.store';
+	const authStore = useAuthStore();
+
+	const { user } = storeToRefs(authStore);
+
+	async function handleLogout() {
+		authStore.logout();
+	}
 </script>
 
 <style scoped></style>
