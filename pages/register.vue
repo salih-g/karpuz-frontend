@@ -107,6 +107,10 @@
 	});
 
 	async function handleRegister() {
+		user.email = '';
+		user.username = '';
+		user.password = '';
+		user.repeatpassword = '';
 		if (user.password !== user.repeatpassword) {
 			user.password = '';
 			user.repeatpassword = '';

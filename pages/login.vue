@@ -80,6 +80,8 @@
 	});
 
 	async function handleLogin() {
+		user.username = '';
+		user.password = '';
 		await authStore.login({
 			username: user.username,
 			password: user.password,
