@@ -1,13 +1,9 @@
 <template>
-	<nav class="navbar bg-white" id="navbar">
+	<nav class="navbar bg-white h-10" id="navbar">
 		<!-- Logo -->
 		<div class="flex-1">
 			<NuxtLink to="/" append class="btn btn-ghost normal-case text-xl">
-				<img
-					src="../assets/karpuz.png"
-					class="mr-3 h-6 sm:h-9"
-					alt="Karpuz Logo"
-				/>
+				<img src="../assets/karpuz.png" class="mr-3 h-6" alt="Karpuz Logo" />
 				<span
 					class="self-center text-xl font-semibold whitespace-nowrap text-gray-600"
 					>Karpuz</span

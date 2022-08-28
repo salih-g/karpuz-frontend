@@ -8,7 +8,7 @@
 			placeholder="Type something..."
 			class="focus:outline-none w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 textarea"
 			maxlength="240"
-			rows="1"
+			rows="4"
 			v-model="postBody"
 		></textarea>
 		<!-- process bar -->
@@ -20,13 +20,12 @@
 		<button
 			:class="
 				loading
-					? 'btn btn-primary loading flex items-center justify-center ml-2 rounded-lg  bg-red-500 '
-					: 'btn btn-primary  ml-2 px-5 rounded-lg bg-red-500 h-fit'
+					? 'btn btn-primary loading py-10 ml-2 rounded-lg  bg-red-500'
+					: 'btn btn-primary  ml-2 px-5 py-10 rounded-lg bg-red-500 h-fit'
 			"
 		>
 			<svg
 				v-if="!loading"
-				class="mr-0.5"
 				viewBox="0 0 24 24"
 				width="16"
 				height="16"
