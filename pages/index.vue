@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-if="feed.length === 0">
-			<main class="w-full max-w-4xl items-center mx-auto px-6">
+			<main class="w-full max-w-4xl items-center mx-auto">
 				<PostInput class="centerDiv50" v-if="user" />
 				<PostCardSkeleton class="centerDiv50" />
 				<PostCardSkeleton class="centerDiv50" />
@@ -9,8 +9,10 @@
 			</main>
 		</div>
 		<div v-if="feed.length > 0">
-			<main class="w-full max-w-4xl items-center mx-auto px-6">
+			<main class="w-full max-w-4xl items-center mx-auto">
 				<PostInput class="centerDiv50" v-if="user" />
+
+				<!-- loading -->
 				<div>
 					<div class="translate-x-1/2 translate-y-1/2 mb-12" v-if="loading">
 						<div
@@ -42,7 +44,7 @@
 
 <style>
 	.centerDiv50 {
-		margin: 50px auto;
+		margin: 20px auto;
 	}
 
 	.maxWidth {
