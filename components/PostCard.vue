@@ -68,25 +68,16 @@
 	import { useContentStore } from '@/stores/content.store';
 	import content from '~~/fetch/content';
 	const props = defineProps({
-		postId: String,
+		post: Object,
 	});
 
-	let post = ref({});
 	const authStore = useAuthStore();
 	const contentStore = useContentStore();
 	const { user } = storeToRefs(authStore);
-	await handleFetch();
-	watch(
-		() => props.postId,
-		async () => {
-			console.log('girdim');
-			await handleFetch();
-		},
-	);
 
 	const isPostLiked = computed(() => {
 		let liked;
-		post.value.postLikes.forEach((like) => {
+		props.post.postLikes.forEach((like) => {
 			liked = like.userId === user.value.id;
 		});
 		return liked;
@@ -95,8 +86,6 @@
 	async function handleLike(post) {
 		const likeData = { postId: post.id, userId: user.value.id };
 		await contentStore.initLikePost(likeData, user.value.token);
-	}
-	async function handleFetch() {
-		post.value = await content.fetchPostById(props.postId);
+		props.post = await content.fetchPostById(props.post.id);
 	}
 </script>

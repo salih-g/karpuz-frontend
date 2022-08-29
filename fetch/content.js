@@ -3,7 +3,6 @@ import axios from './axios';
 export default {
 	fetchPosts: async () => await axios().get('/v1/content'),
 	fetchPostById: async (postId) => {
-		console.log('girdim2');
 		return await axios()
 			.get(`/v1/content/${postId}`)
 			.then((response) => response.data);
