@@ -19,13 +19,13 @@
 		<!-- footer -->
 		<button
 			:class="
-				loading
+				fetchLoading
 					? 'btn btn-primary loading py-10 ml-2 rounded-lg  bg-red-500'
 					: 'btn btn-primary  ml-2 px-5 py-10 rounded-lg bg-red-500 h-fit'
 			"
 		>
 			<svg
-				v-if="!loading"
+				v-if="!fetchLoading"
 				viewBox="0 0 24 24"
 				width="16"
 				height="16"
@@ -51,7 +51,7 @@
 	const contentStore = useContentStore();
 	const authStore = useAuthStore();
 	const { user } = storeToRefs(authStore);
-	const { loading } = storeToRefs(contentStore);
+	const { fetchLoading } = storeToRefs(contentStore);
 	const postBody = ref('');
 	const postLenght = computed(() => {
 		return (postBody.value.length * 100) / 240;

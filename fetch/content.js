@@ -12,4 +12,14 @@ export default {
 			headers,
 		});
 	},
+	likePost: async (postBody, token) => {
+		const headers = {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		};
+
+		return await axios().put('/v1/content/likePost', postBody, {
+			headers,
+		});
+	},
 };
