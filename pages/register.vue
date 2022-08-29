@@ -107,10 +107,6 @@
 	});
 
 	async function handleRegister() {
-		user.email = '';
-		user.username = '';
-		user.password = '';
-		user.repeatpassword = '';
 		if (user.password !== user.repeatpassword) {
 			user.password = '';
 			user.repeatpassword = '';
@@ -126,6 +122,11 @@
 			username: user.username,
 			password: user.password,
 		});
+
+		user.email = '';
+		user.username = '';
+		user.password = '';
+		user.repeatpassword = '';
 
 		if (authStore.registerError !== null) {
 			setTimeout(() => {

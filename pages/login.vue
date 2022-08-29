@@ -80,12 +80,13 @@
 	});
 
 	async function handleLogin() {
-		user.username = '';
-		user.password = '';
 		await authStore.login({
 			username: user.username,
 			password: user.password,
 		});
+
+		user.username = '';
+		user.password = '';
 
 		if (authStore.loginError !== null) {
 			setTimeout(() => {
