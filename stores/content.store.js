@@ -7,7 +7,7 @@ export const useContentStore = defineStore('content', {
 		feed: [],
 		fetchError: null,
 		fetchLoading: false,
-		likeLoading: false,
+		singlePostLoading: false,
 	}),
 	actions: {
 		async initFetchPosts() {
@@ -41,11 +41,11 @@ export const useContentStore = defineStore('content', {
 		},
 
 		async initLikePost(likeBody, token) {
-			this.likeLoading = true;
+			this.singlePostLoading = true;
 			try {
 				await content.likePost(likeBody, token);
 				await this.initFetchPosts().then(() => {
-					this.likeLoading = false;
+					this.singlePostLoading = false;
 				});
 			} catch (error) {
 				this.fetchError = error.response.data;

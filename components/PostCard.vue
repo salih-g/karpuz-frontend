@@ -24,7 +24,7 @@
 			<p class="text-gray-500 text-sm mb-3 mx-3 px-2" v-html="post.body"></p>
 		</NuxtLink>
 		<!-- card actions -->
-		<div class="card-actions">
+		<div class="card-actions flex justify-between items-center">
 			<div class="mx-5 text-xs">
 				<div class="flex text-gray-700 font-normal">
 					Comments:
@@ -40,6 +40,7 @@
 					v-if="user !== null"
 				>
 					<svg
+						v-if="!singlePostLoading"
 						class="h-4 w-4 text-red-500"
 						:fill="isPostLiked ? 'currentColor' : 'none'"
 						viewBox="0 0 24 24"
@@ -51,6 +52,41 @@
 							stroke-linejoin="round"
 							d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
 						></path>
+					</svg>
+
+					<svg
+						v-if="singlePostLoading"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						style="
+							margin: auto;
+							background: none;
+							display: block;
+							shape-rendering: auto;
+						"
+						width="16px"
+						height="16px"
+						viewBox="0 0 100 100"
+						preserveAspectRatio="xMidYMid"
+					>
+						<circle
+							cx="50"
+							cy="50"
+							fill="none"
+							stroke="#e15b64"
+							stroke-width="10"
+							r="35"
+							stroke-dasharray="164.93361431346415 56.97787143782138"
+						>
+							<animateTransform
+								attributeName="transform"
+								type="rotate"
+								repeatCount="indefinite"
+								dur="1s"
+								values="0 50 50;360 50 50"
+								keyTimes="0;1"
+							></animateTransform>
+						</circle>
 					</svg>
 				</button>
 				Likes:
@@ -74,6 +110,7 @@
 	const authStore = useAuthStore();
 	const contentStore = useContentStore();
 	const { user } = storeToRefs(authStore);
+	const { singlePostLoading } = storeToRefs(contentStore);
 
 	const isPostLiked = computed(() => {
 		let liked;

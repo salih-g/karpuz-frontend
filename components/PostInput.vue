@@ -17,13 +17,7 @@
 			:style="`--value: ${postLenght}; --size: 1.5rem; --thickness: 6px`"
 		></div>
 		<!-- footer -->
-		<button
-			:class="
-				fetchLoading
-					? 'btn btn-primary loading py-10 ml-2 rounded-lg  bg-red-500'
-					: 'btn btn-primary  ml-2 px-5 py-10 rounded-lg bg-red-500 h-fit'
-			"
-		>
+		<button class="btn btn-primary ml-2 px-5 py-10 rounded-lg bg-red-500 h-fit">
 			<svg
 				v-if="!fetchLoading"
 				viewBox="0 0 24 24"
@@ -37,6 +31,41 @@
 			>
 				<line x1="22" y1="2" x2="11" y2="13"></line>
 				<polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+			</svg>
+			<svg
+				v-if="fetchLoading"
+				stroke="currentColor"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink"
+				style="
+					margin: auto;
+					background: none;
+					display: block;
+					shape-rendering: auto;
+				"
+				width="16px"
+				height="16px"
+				viewBox="0 0 100 100"
+				preserveAspectRatio="xMidYMid"
+			>
+				<circle
+					cx="50"
+					cy="50"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="10"
+					r="35"
+					stroke-dasharray="164.93361431346415 56.97787143782138"
+				>
+					<animateTransform
+						attributeName="transform"
+						type="rotate"
+						repeatCount="indefinite"
+						dur="1s"
+						values="0 50 50;360 50 50"
+						keyTimes="0;1"
+					></animateTransform>
+				</circle>
 			</svg>
 		</button>
 	</form>
