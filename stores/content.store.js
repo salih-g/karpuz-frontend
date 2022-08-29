@@ -18,6 +18,13 @@ export const useContentStore = defineStore('content', {
 				this.fetchError = error.response.data;
 			}
 		},
+		async initFetchPostById(postId) {
+			try {
+				return await content.fetchPostById(postId);
+			} catch (error) {
+				this.fetchError = error.response.data;
+			}
+		},
 		async initCreatePost(postBody, user) {
 			this.fetchLoading = true;
 			try {

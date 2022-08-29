@@ -26,7 +26,7 @@
 					class="centerDiv20"
 					v-for="(post, key) in feed"
 					:key="key"
-					:post="post"
+					:postId="post.id"
 				/>
 			</main>
 		</div>

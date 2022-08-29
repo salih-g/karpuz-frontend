@@ -21,12 +21,7 @@
 		</NuxtLink>
 		<!-- card body -->
 		<NuxtLink :to="`/content/${post.id}`">
-			<p class="text-gray-500 text-sm mb-3 mx-3 px-2">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus sit
-				illo nulla, sunt itaque beatae unde perspiciatis incidunt explicabo
-				ratione fuga eaque, ad voluptas praesentium quidem nihil dignissimos
-				recusandae autem! Lorem ipsum dol
-			</p>
+			<p class="text-gray-500 text-sm mb-3 mx-3 px-2" v-html="post.body"></p>
 		</NuxtLink>
 		<!-- card actions -->
 		<div class="card-actions">
@@ -71,16 +66,27 @@
 	import { storeToRefs } from 'pinia';
 	import { useAuthStore } from '@/stores/auth.store';
 	import { useContentStore } from '@/stores/content.store';
+	import content from '~~/fetch/content';
 	const props = defineProps({
-		post: Object,
+		postId: String,
 	});
+
+	let post = ref({});
 	const authStore = useAuthStore();
 	const contentStore = useContentStore();
 	const { user } = storeToRefs(authStore);
+	await handleFetch();
+	watch(
+		() => props.postId,
+		async () => {
+			console.log('girdim');
+			await handleFetch();
+		},
+	);
 
 	const isPostLiked = computed(() => {
 		let liked;
-		props.post.postLikes.forEach((like) => {
+		post.value.postLikes.forEach((like) => {
 			liked = like.userId === user.value.id;
 		});
 		return liked;
@@ -89,5 +95,8 @@
 	async function handleLike(post) {
 		const likeData = { postId: post.id, userId: user.value.id };
 		await contentStore.initLikePost(likeData, user.value.token);
+	}
+	async function handleFetch() {
+		post.value = await content.fetchPostById(props.postId);
 	}
 </script>
