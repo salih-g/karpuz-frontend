@@ -224,7 +224,7 @@
 		}
 
 		const commentData = {
-			user: user.value.id,
+			userId: user.value.id,
 			postId: post.id,
 			body: comment.value,
 		};
