@@ -202,11 +202,10 @@
 	const { user } = storeToRefs(authStore);
 
 	const isPostLiked = computed(() => {
-		let liked;
-		props.post.postLikes.forEach((like) => {
-			liked = like.userId === user.value.id;
-		});
-		return liked;
+		const liked = props.post.postLikes.filter(
+			(like) => like.userId === user.value.id,
+		);
+		return liked.length > 0;
 	});
 
 	async function handleLike(post) {
