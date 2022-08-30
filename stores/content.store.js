@@ -33,6 +33,15 @@ export const useContentStore = defineStore('content', {
 			}
 		},
 
+		async initCreateComment(commentBody, token) {
+			try {
+				await content.createComment(commentBody, token);
+				await this.initFetchPosts();
+			} catch (error) {
+				this.fetchError = error.response.data;
+			}
+		},
+
 		async initLikePost(likeBody, token) {
 			try {
 				await content.likePost(likeBody, token);

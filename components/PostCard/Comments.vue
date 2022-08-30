@@ -1,10 +1,12 @@
 <template>
 	<div>
 		<div class="text-gray-600 p-4 flex">
-			<img
-				class="rounded-full h-8 w-8 mr-2 mt-1"
-				:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
-			/>
+			<NuxtLink :to="`/user/${comment.user.username}`">
+				<img
+					class="rounded-full h-8 w-8 mr-2 mt-1 cursor-pointer"
+					:src="`https://avatars.dicebear.com/api/big-smile/${comment.user.username}.svg?b=%23c8ccd5&r=50&scale=82`"
+				/>
+			</NuxtLink>
 
 			<div>
 				<div class="flex flex-row mb-1">
@@ -96,7 +98,6 @@
 				Show more
 			</NuxtLink>
 		</div>
-		<!-- create comment -->
 	</div>
 </template>
 

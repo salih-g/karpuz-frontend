@@ -1,7 +1,7 @@
 <template>
 	<div class="card bg-white rounded-lg p-4 w-full md:w-3/4">
 		<!-- card header -->
-		<NuxtLink :to="`/user/${user.username}`">
+		<NuxtLink :to="`/user/${post.user.username}`">
 			<div class="rounded-full flex flex-row px-2 py-3 mx-3">
 				<img
 					class="w-12 h-12 object-cover rounded-full shadow cursor-pointer"
@@ -104,6 +104,82 @@
 			:commentsLenght="post.comments.length"
 			:postId="post.id"
 		/>
+		<!-- create comment -->
+		<form
+			class="flex items-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400"
+			@submit.prevent="handleComment(post)"
+			v-if="user !== null"
+		>
+			<NuxtLink :to="`/user/${user.username}`" class="mr-2">
+				<img
+					class="w-10 h-10 object-cover rounded-full cursor-pointer"
+					alt="User avatar"
+					:src="`https://avatars.dicebear.com/api/big-smile/${user.username}.svg?b=%23c8ccd5&r=50&scale=82`"
+				/>
+			</NuxtLink>
+			<input
+				type="search"
+				class="w-full py-2 pl-4 pr-4 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
+				style="border-radius: 25px"
+				placeholder="Post a comment..."
+				required
+				autocomplete="off"
+				maxlength="240"
+				v-model="comment"
+			/>
+			<button
+				class="flex items-center py-2 px-4 mx-3 rounded-lg text-sm bg-red-500 text-white shadow-lg"
+			>
+				<svg
+					v-if="!createCommentLoading"
+					viewBox="0 0 24 24"
+					width="16"
+					height="16"
+					stroke="currentColor"
+					stroke-width="2"
+					fill="none"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<line x1="22" y1="2" x2="11" y2="13"></line>
+					<polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+				</svg>
+				<svg
+					v-if="createCommentLoading"
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+					style="
+						margin: auto;
+						background: none;
+						display: block;
+						shape-rendering: auto;
+					"
+					width="16px"
+					height="16px"
+					viewBox="0 0 100 100"
+					preserveAspectRatio="xMidYMid"
+				>
+					<circle
+						cx="50"
+						cy="50"
+						fill="none"
+						stroke="#e15b64"
+						stroke-width="10"
+						r="35"
+						stroke-dasharray="164.93361431346415 56.97787143782138"
+					>
+						<animateTransform
+							attributeName="transform"
+							type="rotate"
+							repeatCount="indefinite"
+							dur="1s"
+							values="0 50 50;360 50 50"
+							keyTimes="0;1"
+						></animateTransform>
+					</circle>
+				</svg>
+			</button>
+		</form>
 	</div>
 </template>
 
@@ -111,13 +187,14 @@
 	import { storeToRefs } from 'pinia';
 	import { useAuthStore } from '@/stores/auth.store';
 	import { useContentStore } from '@/stores/content.store';
-	import content from '~~/fetch/content';
-	import { timeSince } from '~~/utils';
+	// import content from '~~/fetch/content';
+	import { isOnlyWhiteSpace, timeSince } from '~~/utils';
 	const props = defineProps({
 		post: Object,
 	});
 
 	const postLikeLoading = ref(false);
+	const createCommentLoading = ref(false);
 	const comment = ref('');
 
 	const authStore = useAuthStore();
@@ -139,5 +216,22 @@
 			.initLikePost(likeData, user.value.token)
 			.then(() => (postLikeLoading.value = false));
 		// props.post = await content.fetchPostById(props.post.id);
+	}
+
+	async function handleComment(post) {
+		createCommentLoading.value = true;
+		if (isOnlyWhiteSpace(comment.value)) {
+			comment.value = '';
+		}
+
+		const commentData = {
+			user: user.value.id,
+			postId: post.id,
+			body: comment.value,
+		};
+		comment.value = '';
+		await contentStore
+			.initCreateComment(commentData, user.value.token)
+			.then(() => (createCommentLoading.value = false));
 	}
 </script>
