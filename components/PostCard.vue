@@ -13,26 +13,27 @@
 						{{ post.user.username }}
 					</div>
 					<small class="text-gray-400 font-thin text-xs">
-						12 days ago
-						<!-- {{ timeSince(new Date(post.createdAt)) }} ago -->
+						{{ timeSince(new Date(post.createdAt)) }} ago
 					</small>
 				</div>
 			</div>
 		</NuxtLink>
 		<!-- card body -->
-		<NuxtLink :to="`/content/${post.id}`">
+		<div>
 			<p class="text-gray-500 text-sm mb-3 mx-3 px-2" v-html="post.body"></p>
-		</NuxtLink>
+		</div>
 		<!-- card actions -->
 		<div class="card-actions flex justify-between items-center">
-			<div class="mx-5 text-xs">
+			<!-- comment count-->
+			<NuxtLink :to="`/content/${post.id}`" class="mx-5 text-xs">
 				<div class="flex text-gray-700 font-normal">
 					Comments:
 					<div class="ml-1 text-gray-400 text-ms">
-						<!-- {{ post.comments.length }} -->10
+						{{ post.comments.length }}
 					</div>
 				</div>
-			</div>
+			</NuxtLink>
+			<!-- likes -->
 			<div class="flex text-gray-700 rounded-md items-center flex-end text-sm">
 				<button
 					class="transition ease-out duration-300 hover:bg-gray-50 bg-gray-100 p-2 rounded-full text-gray-100 cursor-pointer mr-2"
@@ -40,7 +41,7 @@
 					v-if="user !== null"
 				>
 					<svg
-						v-if="!singlePostLoading"
+						v-if="!postLikeLoading"
 						class="h-4 w-4 text-red-500"
 						:fill="isPostLiked ? 'currentColor' : 'none'"
 						viewBox="0 0 24 24"
@@ -55,7 +56,7 @@
 					</svg>
 
 					<svg
-						v-if="singlePostLoading"
+						v-if="postLikeLoading"
 						xmlns="http://www.w3.org/2000/svg"
 						xmlns:xlink="http://www.w3.org/1999/xlink"
 						style="
@@ -95,6 +96,38 @@
 				</div>
 			</div>
 		</div>
+		<!-- comments -->
+		<div>
+			<div
+				class="text-gray-600 p-4 flex"
+				v-if="showLess"
+				v-for="(comment, key) in post.comments.slice(0, 3)"
+				:key="key"
+			>
+				<img
+					class="rounded-full h-8 w-8 mr-2 mt-1"
+					:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
+				/>
+				<div>
+					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 maxWidth">
+						<div class="font-semibold text-sm leading-relaxed">
+							{{ comment.user.username }}
+						</div>
+						<div
+							class="text-xs leading-snug md:leading-normal"
+							v-html="comment.body"
+						></div>
+					</div>
+					<div class="text-xs mt-0.5 text-gray-500">
+						{{ timeSince(new Date(comment.createdAt)) }} ago
+					</div>
+					<div
+						class="bg-white border border-white rounded-full float-right mr-0.5 flex shadow items-center"
+					></div>
+				</div>
+			</div>
+			<!-- create comment -->
+		</div>
 	</div>
 </template>
 
@@ -103,14 +136,18 @@
 	import { useAuthStore } from '@/stores/auth.store';
 	import { useContentStore } from '@/stores/content.store';
 	import content from '~~/fetch/content';
+	import { timeSince } from '~~/utils';
 	const props = defineProps({
 		post: Object,
 	});
 
+	const showLess = ref(true);
+	const postLikeLoading = ref(false);
+	const comment = ref('');
+
 	const authStore = useAuthStore();
 	const contentStore = useContentStore();
 	const { user } = storeToRefs(authStore);
-	const { singlePostLoading } = storeToRefs(contentStore);
 
 	const isPostLiked = computed(() => {
 		let liked;
@@ -121,8 +158,11 @@
 	});
 
 	async function handleLike(post) {
+		postLikeLoading.value = true;
 		const likeData = { postId: post.id, userId: user.value.id };
-		await contentStore.initLikePost(likeData, user.value.token);
+		await contentStore
+			.initLikePost(likeData, user.value.token)
+			.then(() => (postLikeLoading.value = false));
 		props.post = await content.fetchPostById(props.post.id);
 	}
 </script>
