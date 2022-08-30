@@ -97,37 +97,13 @@
 			</div>
 		</div>
 		<!-- comments -->
-		<div>
-			<div
-				class="text-gray-600 p-4 flex"
-				v-if="showLess"
-				v-for="(comment, key) in post.comments.slice(0, 3)"
-				:key="key"
-			>
-				<img
-					class="rounded-full h-8 w-8 mr-2 mt-1"
-					:src="`https://avatars.dicebear.com/api/big-smile/${comment.username}.svg?b=%23c8ccd5&r=50&scale=82`"
-				/>
-				<div>
-					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 maxWidth">
-						<div class="font-semibold text-sm leading-relaxed">
-							{{ comment.user.username }}
-						</div>
-						<div
-							class="text-xs leading-snug md:leading-normal"
-							v-html="comment.body"
-						></div>
-					</div>
-					<div class="text-xs mt-0.5 text-gray-500">
-						{{ timeSince(new Date(comment.createdAt)) }} ago
-					</div>
-					<div
-						class="bg-white border border-white rounded-full float-right mr-0.5 flex shadow items-center"
-					></div>
-				</div>
-			</div>
-			<!-- create comment -->
-		</div>
+		<PostCardComments
+			v-for="(comment, key) in post.comments.slice(0, 3)"
+			:comment="comment"
+			:key="key"
+			:commentsLenght="post.comments.length"
+			:postId="post.id"
+		/>
 	</div>
 </template>
 
@@ -141,7 +117,6 @@
 		post: Object,
 	});
 
-	const showLess = ref(true);
 	const postLikeLoading = ref(false);
 	const comment = ref('');
 
