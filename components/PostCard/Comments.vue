@@ -10,9 +10,12 @@
 				<div class="flex flex-row mb-1">
 					<!-- comment body -->
 					<div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5 maxWidth">
-						<div class="font-semibold text-sm leading-relaxed">
+						<NuxtLink
+							:to="`/user/${comment.user.username}`"
+							class="font-semibold text-sm leading-relaxed"
+						>
 							{{ comment.user.username }}
-						</div>
+						</NuxtLink>
 						<div
 							class="text-xs leading-snug md:leading-normal"
 							v-html="comment.body"
@@ -24,7 +27,7 @@
 					>
 						<button
 							class="transition ease-out duration-300 hover:bg-gray-50 bg-gray-100 p-2 rounded-full text-gray-100 cursor-pointer mr-2"
-							@click="handleLike(post)"
+							@click="handleLike(comment)"
 							v-if="user !== null"
 						>
 							<svg
@@ -100,6 +103,7 @@
 <script setup>
 	import { storeToRefs } from 'pinia';
 	import { useAuthStore } from '@/stores/auth.store';
+	import { useContentStore } from '@/stores/content.store';
 	import { timeSince } from '~~/utils';
 
 	const props = defineProps({
@@ -108,6 +112,7 @@
 		postId: String,
 	});
 	const authStore = useAuthStore();
+	const contentStore = useContentStore();
 	const { user } = storeToRefs(authStore);
 
 	const commentLikeLoading = ref(false);
@@ -119,4 +124,12 @@
 		});
 		return liked;
 	});
+
+	async function handleLike(comment) {
+		commentLikeLoading.value = true;
+		const likeData = { commentId: comment.id, userId: user.value.id };
+		await contentStore.initLikeComment(likeData, user.value.token).then(() => {
+			commentLikeLoading.value = false;
+		});
+	}
 </script>

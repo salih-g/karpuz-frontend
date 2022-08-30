@@ -138,6 +138,6 @@
 		await contentStore
 			.initLikePost(likeData, user.value.token)
 			.then(() => (postLikeLoading.value = false));
-		props.post = await content.fetchPostById(props.post.id);
+		// props.post = await content.fetchPostById(props.post.id);
 	}
 </script>

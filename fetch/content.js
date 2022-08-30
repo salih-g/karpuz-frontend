@@ -28,4 +28,14 @@ export default {
 			headers,
 		});
 	},
+	likeComment: async (commentBody, token) => {
+		const headers = {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		};
+
+		return await axios().put('/v1/content/likeComment', commentBody, {
+			headers,
+		});
+	},
 };
