@@ -14,7 +14,7 @@
 		"nuxt": "3.0.0-rc.8"
 	},
 	"dependencies": {
-		"@pinia/nuxt": "^0.4.1",
+		"@pinia/nuxt": "^0.4.2",
 		"axios": "^0.27.2"
 	}
 }
